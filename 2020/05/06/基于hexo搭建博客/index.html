@@ -129,13 +129,13 @@
     <section class="content">
       <h2 id="基于hexo搭建博客"><a href="#基于hexo搭建博客" class="headerlink" title="基于hexo搭建博客"></a>基于hexo搭建博客</h2><p>本文参照于<a href="https://blog.csdn.net/sinat_37781304/article/details/82729029" target="_blank" rel="noopener">hexo史上最全搭建教程</a>所写，侵权必删。</p>
 <h4 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h4><p>详见上述链接，内容十分详实</p>
-<h4 id="hexo常用指令"><a href="#hexo常用指令" class="headerlink" title="hexo常用指令"></a>hexo常用指令</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> pagename</span><br></pre></td></tr></table></figure>
+<h4 id="hexo常用指令"><a href="#hexo常用指令" class="headerlink" title="hexo常用指令"></a>hexo常用指令</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">hexo <span class="hljs-keyword">new</span> pagename<br></code></pre></td></tr></table></figure>
 
 <p>用于在/source/-posts新建一个md文档</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hexo</span> <span class="string">clean</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">g</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">d</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">clean</span><br><span class="hljs-attr">hexo</span> <span class="hljs-string">g</span><br><span class="hljs-attr">hexo</span> <span class="hljs-string">d</span><br></code></pre></td></tr></table></figure>
 
 <p>用于将写好的md文档上传至博客</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo s</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo s</span><br></code></pre></td></tr></table></figure>
 
 <p>在本地建立服务器，根据提示的网址进行访问，我们就可以看见写好的博客了。通过ctrl+c退出。</p>
 <h4 id="hexo基本配置"><a href="#hexo基本配置" class="headerlink" title="hexo基本配置"></a>hexo基本配置</h4><p>在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。</p>
@@ -199,7 +199,7 @@
 <p>设计十分优美，附加的使用手册十分友好，有问题也可以直接问博主，人特别好，强烈推荐！！！</p>
 <p>详情设置可以参考上述网址与<a href="https://github.com/izhaoo/hexo-theme-zhaoo" target="_blank" rel="noopener">hexo-theme-zhaoo</a></p>
 <h5 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h5><p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Hello world</span><br><span class="line">data: <span class="number">2020</span>/<span class="number">5</span>/<span class="number">6</span> <span class="number">09</span>:<span class="number">51</span>:<span class="number">35</span></span><br><span class="line">tag:</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">title: Hello world<br>data: <span class="hljs-number">2020</span>/<span class="hljs-number">5</span>/<span class="hljs-number">6</span> <span class="hljs-number">09</span>:<span class="hljs-number">51</span>:<span class="hljs-number">35</span><br>tag:<br></code></pre></td></tr></table></figure>
 
 <p>下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
 <table>
@@ -244,7 +244,7 @@
 </tbody></table>
 <p>其中，分类和标签需要区别一下，分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
 <h6 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h6><p>当你每一次使用代码</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> paper</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">hexo <span class="hljs-keyword">new</span> paper<br></code></pre></td></tr></table></figure>
 
 <p>它其实默认使用的是<code>post</code>这个布局，也就是在<code>source</code>文件夹下的<code>_post</code>里面。</p>
 <p>Hexo 有三种默认布局：<code>post</code>、<code>page</code> 和 <code>draft</code>，它们分别对应不同的路径，而您自定义的其他布局和 <code>post</code> 相同，都将储存到 <code>source/_posts</code> 文件夹。</p>
@@ -270,18 +270,18 @@
 </tbody></table>
 <hr>
 <h6 id="page"><a href="#page" class="headerlink" title="page"></a>page</h6><p>如果你想另起一页，那么可以使用</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new<span class="built_in"> page </span>board</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">hexo new<span class="hljs-built_in"> page </span>board<br></code></pre></td></tr></table></figure>
 
 <p>系统会自动给你在source文件夹下创建一个board文件夹，<a href="http://xn--boardindex-zt2p02eqgs45dlht758bqmyd.md/" target="_blank" rel="noopener">以及board文件夹中的index.md</a>，这样你访问的board对应的链接就是<code>http://xxx.xxx/board</code></p>
 <h6 id="draft"><a href="#draft" class="headerlink" title="draft"></a>draft</h6><p>draft是草稿的意思，也就是你如果想写文章，又不希望被看到，那么可以</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="type">draft</span> <span class="keyword">new</span><span class="type">page</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">draft</span> <span class="hljs-keyword">new</span><span class="hljs-type">page</span><br></code></pre></td></tr></table></figure>
 
 <p>这样会在source/_draft中新建一个newpage.md文件，如果你的草稿文件写的过程中，想要预览一下，那么可以使用</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo<span class="built_in"> server </span>--draft</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">hexo<span class="hljs-built_in"> server </span>--draft<br></code></pre></td></tr></table></figure>
 
 <p>在本地端口中开启服务预览。</p>
 <p>如果你的草稿文件写完了，想要发表到post中，</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo publish draft newpage</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo publish draft newpage</span><br></code></pre></td></tr></table></figure>
 
 <p>就会自动把newpage.md发送到post中。</p>
 
