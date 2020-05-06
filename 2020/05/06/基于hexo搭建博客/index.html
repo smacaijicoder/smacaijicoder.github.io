@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hexo使用手册 - 小菜鸡的探险之旅</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  
+  <meta name="description" content="基于hexo搭建博客本文参照于hexo史上最全搭建教程..."> 
+  
+  <meta name="author" content="稳压器"> 
+  <link rel="shortcut icon" href="/image/favicon.jpg">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/a11y-dark.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: true,
+      donate_alipay: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r',
+      donate_wechat: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMXMiCjQ2grqQ1FNdpWJ5kQ2CdYILLgvG8xrbYu99rdM0FnNYVFE6QDVntEljo5O1tJIwAgZF0VXkJfzuJuyeJBw!/r',
+      gitalk: {
+        enable: false,
+        clientID: '',
+        clientSecret: '',
+        id: window.location.pathname,
+        repo: '',
+        owner: '',
+        admin: ''
+      },
+      motto: {
+        api: '',
+        default: '我在开了灯的床头下，想问问自己的心啊。'
+      }
+    }
+  </script>
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  <header>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2019-2019 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</nav>
+</header>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img      class="lazyload" data-original="/image/post-image0.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">hexo使用手册</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-05-06</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1487</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <h2 id="基于hexo搭建博客"><a href="#基于hexo搭建博客" class="headerlink" title="基于hexo搭建博客"></a>基于hexo搭建博客</h2><p>本文参照于<a href="https://blog.csdn.net/sinat_37781304/article/details/82729029" target="_blank" rel="noopener">hexo史上最全搭建教程</a>所写，侵权必删。</p>
+<h4 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h4><p>详见上述链接，内容十分详实</p>
+<h4 id="hexo常用指令"><a href="#hexo常用指令" class="headerlink" title="hexo常用指令"></a>hexo常用指令</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> pagename</span><br></pre></td></tr></table></figure>
+
+<p>用于在/source/-posts新建一个md文档</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hexo</span> <span class="string">clean</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">g</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">d</span></span><br></pre></td></tr></table></figure>
+
+<p>用于将写好的md文档上传至博客</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo s</span></span><br></pre></td></tr></table></figure>
+
+<p>在本地建立服务器，根据提示的网址进行访问，我们就可以看见写好的博客了。通过ctrl+c退出。</p>
+<h4 id="hexo基本配置"><a href="#hexo基本配置" class="headerlink" title="hexo基本配置"></a>hexo基本配置</h4><p>在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。</p>
+<h5 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>title</td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td>description</td>
+<td>网站描述，建议包含网站的关键字</td>
+</tr>
+<tr>
+<td>author</td>
+<td>作者</td>
+</tr>
+<tr>
+<td>language</td>
+<td>语言</td>
+</tr>
+<tr>
+<td>timezone</td>
+<td>网络时区</td>
+</tr>
+</tbody></table>
+<h5 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>url</td>
+<td>网址</td>
+</tr>
+<tr>
+<td>root</td>
+<td>网站根目录</td>
+</tr>
+<tr>
+<td>permalink</td>
+<td>文章的永久链接格式</td>
+</tr>
+<tr>
+<td>permalink_defaults</td>
+<td>永久链接各部分默认值</td>
+</tr>
+</tbody></table>
+<h5 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h5><p>推荐主题<a href="https://www.izhaoo.com/" target="_blank" rel="noopener">zhaoo</a></p>
+<p>设计十分优美，附加的使用手册十分友好，有问题也可以直接问博主，人特别好，强烈推荐！！！</p>
+<p>详情设置可以参考上述网址与<a href="https://github.com/izhaoo/hexo-theme-zhaoo" target="_blank" rel="noopener">hexo-theme-zhaoo</a></p>
+<h5 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h5><p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Hello world</span><br><span class="line">data: <span class="number">2020</span>/<span class="number">5</span>/<span class="number">6</span> <span class="number">09</span>:<span class="number">51</span>:<span class="number">35</span></span><br><span class="line">tag:</span><br></pre></td></tr></table></figure>
+
+<p>下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layout</td>
+<td>布局</td>
+</tr>
+<tr>
+<td>title</td>
+<td>标题</td>
+</tr>
+<tr>
+<td>data</td>
+<td>建立日期</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>更新日期</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>开启文章评论功能</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>标签</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>分类</td>
+</tr>
+<tr>
+<td>permalink</td>
+<td>覆盖文章网址</td>
+</tr>
+</tbody></table>
+<p>其中，分类和标签需要区别一下，分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
+<h6 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h6><p>当你每一次使用代码</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> paper</span><br></pre></td></tr></table></figure>
+
+<p>它其实默认使用的是<code>post</code>这个布局，也就是在<code>source</code>文件夹下的<code>_post</code>里面。</p>
+<p>Hexo 有三种默认布局：<code>post</code>、<code>page</code> 和 <code>draft</code>，它们分别对应不同的路径，而您自定义的其他布局和 <code>post</code> 相同，都将储存到 <code>source/_posts</code> 文件夹。</p>
+<table>
+<thead>
+<tr>
+<th>布局</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>post</td>
+<td>source/_poses</td>
+</tr>
+<tr>
+<td>page</td>
+<td>source</td>
+</tr>
+<tr>
+<td>draft</td>
+<td>source/_drafts</td>
+</tr>
+</tbody></table>
+<hr>
+<h6 id="page"><a href="#page" class="headerlink" title="page"></a>page</h6><p>如果你想另起一页，那么可以使用</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new<span class="built_in"> page </span>board</span><br></pre></td></tr></table></figure>
+
+<p>系统会自动给你在source文件夹下创建一个board文件夹，<a href="http://xn--boardindex-zt2p02eqgs45dlht758bqmyd.md/" target="_blank" rel="noopener">以及board文件夹中的index.md</a>，这样你访问的board对应的链接就是<code>http://xxx.xxx/board</code></p>
+<h6 id="draft"><a href="#draft" class="headerlink" title="draft"></a>draft</h6><p>draft是草稿的意思，也就是你如果想写文章，又不希望被看到，那么可以</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="type">draft</span> <span class="keyword">new</span><span class="type">page</span></span><br></pre></td></tr></table></figure>
+
+<p>这样会在source/_draft中新建一个newpage.md文件，如果你的草稿文件写的过程中，想要预览一下，那么可以使用</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo<span class="built_in"> server </span>--draft</span><br></pre></td></tr></table></figure>
+
+<p>在本地端口中开启服务预览。</p>
+<p>如果你的草稿文件写完了，想要发表到post中，</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo publish draft newpage</span></span><br></pre></td></tr></table></figure>
+
+<p>就会自动把newpage.md发送到post中。</p>
+
+    </section>
+    <section class="extra">
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img      class="lazyload" data-original="http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="    >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+      
+<nav class="nav">
+  
+  
+    <a href="/2020/05/05/icarus%20verilog%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/">icarus verilog使用简介<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1174543808 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/smacaijicoder " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="u201813452@hust.edu.cn " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2019-2019 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</footer>
+    <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+</html>
