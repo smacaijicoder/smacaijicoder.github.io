@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>multi-label image classification - 小菜鸡的探险之旅</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  
+  <meta name="description" content="多标签图像分类总结本文参照[multi-label i..."> 
+  
+  <meta name="author" content="稳压器"> 
+  <link rel="shortcut icon" href="/image/favicon.jpg">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/styles/atom-one-dark.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: true,
+      donate_alipay: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r',
+      donate_wechat: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMXMiCjQ2grqQ1FNdpWJ5kQ2CdYILLgvG8xrbYu99rdM0FnNYVFE6QDVntEljo5O1tJIwAgZF0VXkJfzuJuyeJBw!/r',
+      gitalk: {
+        enable: false,
+        clientID: '',
+        clientSecret: '',
+        id: window.location.pathname,
+        repo: '',
+        owner: '',
+        admin: ''
+      },
+      motto: {
+        api: '',
+        default: '我在开了灯的床头下，想问问自己的心啊。'
+      }
+    }
+  </script>
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  <header>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2019-2019 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</nav>
+</header>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img      class="lazyload" data-original="/image/post-image3.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">multi-label image classification</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-05-10</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2655</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <h2 id="多标签图像分类总结"><a href="#多标签图像分类总结" class="headerlink" title="多标签图像分类总结"></a>多标签图像分类总结</h2><p>本文参照[<a href="https://www.cnblogs.com/youyou0/p/10250326.html" target="_blank" rel="noopener">multi-label image classification:多标签图像分类总结</a>]所写，侵权必删。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>传统监督学习主要是单标签学习，而现实生活中目标样本往往比较复杂，具有多个语义，含有多个标签。</p>
+<p><img      class="lazyload" data-original="https://img2018.cnblogs.com/blog/1384033/201901/1384033-20190110133450754-1929810077.png"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="荷兰城市图片"></p>
+<center>荷兰城市图片</center>
+
+<ul>
+<li><p>传统单标签分类</p>
+<p>  city(person)</p>
+</li>
+<li><p>多标签分类</p>
+<p>  city , river, person, European style</p>
+</li>
+<li><p>人的认知</p>
+<p>  两个人在河道边走路</p>
+<p>  欧洲式建筑，可猜测他们在旅游</p>
+<p>  天很蓝，应该是晴天但不是很晒</p>
+</li>
+</ul>
+<p>相比较而言，单标签分类需要得到的信息量最少，人的认知得到的信息量最多，多标签分类在它们两者之间</p>
+<p>问题描述：</p>
+<p>　　　　　X=Rd表示d维的输入空间，Y={y1,y2,…,yq}表示带有q个可能的标签的标签空间</p>
+<p>　　　　　训练集D={($x^i$,$y^i$)|1≤ i ≤ m},m表示训练集的大小，上标表示样本序数</p>
+<p>　　　　　$x^i$∈ X，是一个d维向量。$y^i$⊆Y，是Y的一个标签子集</p>
+<p>　　　　　任务就是学习要学习一个多标签集的分类器h(x)，预测h(x)⊆Y作为x的正确标签集。</p>
+<p>　　　　　常见的做法是学习一个衡量x和y相关性的函数$f(x,y_{j1})$,希望$f(x,y_{j1})$&gt;$f(x,y_{j2})$，其中$y_{j1}$∈y，$y_{j2}$∉y。</p>
+<h3 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h3><p>可分为三类</p>
+<ul>
+<li>基于样本的评价指标（先考虑单个样本在所有标签上的表现，然后对多个样本取平均，不常用)</li>
+<li>所有样本的评价指标（直接将所有标签的在所有样本上的表现）</li>
+<li>基于标签的评价指标（先考虑单个标签在所有样本上的表现，然后对多个标签取平均）</li>
+</ul>
+<h5 id="所有样本的评价指标"><a href="#所有样本的评价指标" class="headerlink" title="所有样本的评价指标"></a>所有样本的评价指标</h5><p>Precision, Recall, F值（单标签学习中精准率，召回率，F值的天然拓展）</p>
+<p>　　　　　　<img      class="lazyload" data-original="http://latex.codecogs.com/gif.latex?O-P:Precision(h)%20=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bq%7DN_i%5Eq%20%7D%20%7B%5Csum_%7Bi=1%7D%5E%7Bq%7D%20N_i%5Ep%20%7D"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"> 　</p>
+<p>　　　　　　<img      class="lazyload" data-original="http://latex.codecogs.com/gif.latex?O-R:Recall(h)%20=%20%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bq%7DN_i%5Eq%20%7D%20%7B%5Csum_%7Bi=1%7D%5E%7Bq%7D%20N_i%5Eg%20%7D"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img">       </p>
+<p>　　　　　　<img      class="lazyload" data-original="http://latex.codecogs.com/gif.latex?O-F1:F%5E%7B%5Cbeta%7D(h)%20=%20%5Cfrac%7B(1+%5Cbeta%5E2)%20%5Ccdot%20Precision(h)%20%5Ccdot%20Recall(h)%7D%7B%5Cbeta%5E2%20%5Ccdot%20Precision(h)%20%5Ccdot%20Recall(h)%7D"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<p>　　　　　$N^q_i$ ：第i个标签预测正确的图片个数，$N^p_i$：第i个标签预测的图片的个数，$V_i^g$：第i个标签正确的图片的个数，</p>
+<h5 id="基于标签的评价指标"><a href="#基于标签的评价指标" class="headerlink" title="基于标签的评价指标"></a>基于标签的评价指标</h5><p>Precision, Recall, F值（单标签学习中精准率，召回率，F值的天然拓展）</p>
+<p>　　　　　　<img      class="lazyload" data-original="http://latex.codecogs.com/gif.latex?L-P:Precision(h)%20=%20%5Cfrac%7B1%7D%7Bq%7D%5Csum_%7Bi=1%7D%5E%7Bq%7D%5Cfrac%7BN_i%5Eq%7D%20%7BN_i%5Ep%7D"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"> 　</p>
+<p>　　　　　　<img      class="lazyload" data-original="http://latex.codecogs.com/gif.latex?L-R:Recall(h)%20=%20%5Cfrac%7B1%7D%7Bq%7D%5Csum_%7Bi=1%7D%5E%7Bq%7D%5Cfrac%7BN_i%5Eq%7D%20%7BN_i%5Eg%7D"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img">       </p>
+<p>　　　　　　<img      class="lazyload" data-original="http://latex.codecogs.com/gif.latex?L-F1:F%5E%7B%5Cbeta%7D(h)%20=%20%5Cfrac%7B(1+%5Cbeta%5E2)%20%5Ccdot%20Precision(h)%20%5Ccdot%20Recall(h)%7D%7B%5Cbeta%5E2%20%5Ccdot%20Precision(h)%20%5Ccdot%20Recall(h)%7D"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<h3 id="学习算法"><a href="#学习算法" class="headerlink" title="学习算法"></a>学习算法</h3><h5 id="1-三种策略-基于标签之间的关系"><a href="#1-三种策略-基于标签之间的关系" class="headerlink" title="1.三种策略(基于标签之间的关系)"></a>1.三种策略(基于标签之间的关系)</h5><p>多标签学习的主要难点在于输出空间的爆炸增长，比如20个标签，输出空间就有2^20，为了应对指数复杂度的标签空间，需要挖掘标签之间的相关性。比方说，一个图像被标注的标签有热带雨林和足球，那么它具有巴西标签的可能性就很高。一个文档被标注为娱乐标签，它就不太可能和政治相关。有效的挖掘标签之间的相关性，是多标签学习成功的关键。根据对相关性挖掘的强弱，可以把多标签算法分为三类。</p>
+<ul>
+<li>一阶策略：忽略和其它标签的相关性，比如把多标签分解成多个独立的二分类问题（简单高效）。</li>
+<li>二阶策略：考虑标签之间的成对关联，比如为相关标签和不相关标签排序。</li>
+<li>高阶策略：考虑多个标签之间的关联，比如对每个标签考虑所有其它标签的影响（效果最优）。</li>
+</ul>
+<h5 id="2-两种方法-基于如何将多标签分类与当前算法结合起来"><a href="#2-两种方法-基于如何将多标签分类与当前算法结合起来" class="headerlink" title="2.两种方法(基于如何将多标签分类与当前算法结合起来)"></a>2.两种方法(基于如何将多标签分类与当前算法结合起来)</h5><ul>
+<li><p>改造数据适应算法：常用的比如将多个类别合并成单个类别，这样会导致类别数量过</p>
+</li>
+<li><p>改造算法适应数据：常用比如正常输出q维数据，将其中softmax回归改为sigmoid函数，最终将f(.)大于阈值的结果输出出来。</p>
+</li>
+</ul>
+<h5 id="3-Multi-label-CNN（VGG，ResNet101）"><a href="#3-Multi-label-CNN（VGG，ResNet101）" class="headerlink" title="3.Multi-label CNN（VGG，ResNet101）"></a>3.Multi-label CNN（VGG，ResNet101）</h5><p>这是标准的CNN模型，不考虑任何标签依赖性，属于一阶策略，以下都属于高阶策略。</p>
+<h5 id="4-label-embedding"><a href="#4-label-embedding" class="headerlink" title="4.label embedding"></a>4.label embedding</h5><p>label embedding不是一整个网络，而是网络中用于处理标签之间联系的网络一部分。</p>
+<p><img      class="lazyload" data-original="https://img2018.cnblogs.com/blog/1384033/201901/1384033-20190111104528700-2022689206.png"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<center>one hot encoding</center>
+
+<p><img      class="lazyload" data-original="https://img2018.cnblogs.com/blog/1384033/201901/1384033-20190111104626641-694954597.png"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<center>embedding</center>
+
+<p>通过增加节点让计算机学会找到这几个标签之间的关系</p>
+<p>label embedding也就是要达到第二个神经网络所表示的结果，降低训练所需要的数据量。label embedding就是要从数据中自动学习到输入空间到Distributed representation空间的 映射f </p>
+<h5 id="5-CNN-RNN-CNN-LSTM"><a href="#5-CNN-RNN-CNN-LSTM" class="headerlink" title="5.CNN+RNN(CNN-LSTM)"></a>5.CNN+RNN(CNN-LSTM)</h5><p>网络框架主要分为cnn和rnn两个部分，cnn负责提取图片中的语义信息，rnn负责建立image/label关系和label dependency的模型。</p>
+<p><img      class="lazyload" data-original="https://img2018.cnblogs.com/blog/1384033/201901/1384033-20190111003142550-1340482637.png"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<p>另外，在识别不同的object的时候，RNN会将attention转移到不同的地方，如下图：</p>
+<p><img      class="lazyload" data-original="https://img2018.cnblogs.com/blog/1384033/201901/1384033-20190111002911124-60856167.png"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<p>本文两个类别，“zebra” and “elephant”，在预测zebra时，我们发现网络将attention集中到zebra那块。</p>
+<p>这是一个考虑全局级别的标签依赖性，属于高阶策略。</p>
+<h5 id="6-RLSD"><a href="#6-RLSD" class="headerlink" title="6.RLSD"></a>6.RLSD</h5><p>RLSD 在CNN-RNN的基础上，加入了区域潜在语义依赖关系，考虑到图像的位置信息和标签之间的相关性，对算法进行进一步优化。</p>
+<p><img      class="lazyload" data-original="https://img2018.cnblogs.com/blog/1384033/201901/1384033-20190111012315983-1752696491.png"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<center>RLSD神经网络</center>
+
+<h5 id="7-HCP"><a href="#7-HCP" class="headerlink" title="7.HCP"></a>7.HCP</h5><p>HCP的基本思想是，首先提取图像中的候选区域（基本上是上百个），然后对每个候选区域进行分类，最后使用 cross-hypothesis max-pooling 将图像中所有的候选区域分类结果进行融合，得到整个图像的多类别标签，其中也利用到了attention机制，如下图：</p>
+<p><img      class="lazyload" data-original="https://img2018.cnblogs.com/blog/1384033/201901/1384033-20190111014159500-1063548172.png"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="img"></p>
+<p>attention机制:像car，person，horse权重大，注意力比较高。这样做的好处是我们在训练图片时不需要加入位置信息，该算发会框出很多个框，自动调节相关标签的框权值更大，达到减弱噪音的目的。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>　1.目前存在的问题</p>
+<p>　　　目前多标签分类依然存在单标签分类，目标检测的问题，如遮挡，小物体识别</p>
+<p>　　　　另外由于标签相对多存在的问题有要分类的可能性随类别呈指数性增长，rank，样本分布不均</p>
+<p>　2.应用领域</p>
+<p>　　　　图像搜索，图像和视频的语义标注</p>
+<p>　3.研究发展方向</p>
+<p>　　　从整体上来看，multi-label classification 由于涉及到多个标签，所以需要对图片和标签了解的信息量更多，意味着要分类的可能性呈指数型增长。</p>
+<p>　　　为了减少这种分类的可能性，需要考虑标签与标签，标签与图片之间的联系来降低信息量。</p>
+<ul>
+<li><p>第一 涉及到标签与标签之间的关系，也就是NLP里词语与词语之间的联系，这个是语义层次上的</p>
+</li>
+<li><p>第二 涉及到标签与图片之间的关系 ，就是标签与图片特征之间的联系，常用的是attention机制</p>
+</li>
+</ul>
+
+    </section>
+    <section class="extra">
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img      class="lazyload" data-original="http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="    >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/classification/" rel="tag">classification</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-label/" rel="tag">multi-label</a></li></ul>
+
+      
+<nav class="nav">
+  
+    <a href="/2020/05/16/jupyter%E6%89%8B%E5%86%8C/"><i class="iconfont iconleft"></i>jupyter的使用手册</a>
+  
+  
+    <a href="/2020/05/06/markdown%E8%AF%AD%E6%B3%95/">markdown语法<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1174543808 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/smacaijicoder " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:u201813452@hust.edu.cn " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2019-2019 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</footer>
+    <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+</html>
