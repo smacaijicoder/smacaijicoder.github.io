@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>pytorch加载自定义数据集 - 小菜鸡的探险之旅</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  
+  <meta name="description" content="定义自己的数据集及加载训练关于datasetsData..."> 
+  
+  <meta name="author" content="稳压器"> 
+  <link rel="shortcut icon" href="/image/favicon.jpg">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/styles/atom-one-dark.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: true,
+      donate_alipay: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r',
+      donate_wechat: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMXMiCjQ2grqQ1FNdpWJ5kQ2CdYILLgvG8xrbYu99rdM0FnNYVFE6QDVntEljo5O1tJIwAgZF0VXkJfzuJuyeJBw!/r',
+      gitalk: {
+        enable: false,
+        clientID: '',
+        clientSecret: '',
+        id: window.location.pathname,
+        repo: '',
+        owner: '',
+        admin: ''
+      },
+      motto: {
+        api: '',
+        default: '子非我，安知我不知鱼之乐？'
+      }
+    }
+  </script>
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  <header>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2020 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</nav>
+</header>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img      class="lazyload" data-original="/image/post-image7.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">pytorch加载自定义数据集</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-05-21</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5566</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <h2 id="定义自己的数据集及加载训练"><a href="#定义自己的数据集及加载训练" class="headerlink" title="定义自己的数据集及加载训练"></a>定义自己的数据集及加载训练</h2><h3 id="关于datasets"><a href="#关于datasets" class="headerlink" title="关于datasets"></a>关于datasets</h3><p>Dataset类是Pytorch中图像数据集中最为重要的一个类，也是Pytorch中所有数据集加载类中应该继承的父类。其中父类中的两个私有成员函数必须被重载，否则将会触发错误提示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, index)</span>:</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span><br></code></pre></td></tr></table></figure>
+
+<p>其中<code>__len__</code>应该返回数据集的<strong>大小</strong>，而<code>__getitem__</code>应该<strong>编写支持数据集索引的函数</strong><br>这里重点看 <code>__getitem__</code>函数，<code>__getitem__</code>接收一个index，然后返回图片数据和标签，这个index通常指的是一个list的index，这个list的每个元素就包含了图片数据的路径和标签信息。</p>
+<p>然而，如何制作这个list呢，通常的方法是将图片的路径和标签信息存储在一个txt中，然后从该txt中读取。当然，根据数据集的特点，也可以做出一些改变。</p>
+<h3 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs python">  <span class="hljs-comment">#***************************一些必要的包的调用********************************</span><br>    <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F<br>    <span class="hljs-keyword">import</span> torch <br>    <span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br>    <span class="hljs-keyword">from</span> torch.autograd <span class="hljs-keyword">import</span> Variable<br>    <span class="hljs-keyword">import</span> torchvision.models <span class="hljs-keyword">as</span> models<br>    <span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> transforms, utils<br>    <span class="hljs-keyword">from</span> torch.utils.data <span class="hljs-keyword">import</span> Dataset, DataLoader<br>    <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br>    <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>    <span class="hljs-keyword">import</span> torch.optim <span class="hljs-keyword">as</span> optim<br>    <span class="hljs-keyword">import</span> os<br>    <span class="hljs-comment">#***************************初始化一些函数***********************</span><br>    <span class="hljs-comment">#torch.cuda.set_device(gpu_id)#使用GPU</span><br>    learning_rate = <span class="hljs-number">0.0001</span><span class="hljs-comment">#学习率的设置</span><br>    <span class="hljs-comment">#********************数据集的设置********************</span><br>    root =os.getcwd()+ <span class="hljs-string">'/data1/'</span><span class="hljs-comment">#数据集的地址</span><br>     <span class="hljs-comment">#定义读取文件的格式</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_loader</span><span class="hljs-params">(path)</span>:</span><br>        <span class="hljs-keyword">return</span> Image.open(path).convert(<span class="hljs-string">'RGB'</span>)<br><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyDataset</span><span class="hljs-params">(Dataset)</span>:</span> <br>                       <span class="hljs-comment">#创建自己的类： MyDataset,这个类是继承的torch.utils.data.Dataset</span><br>         <span class="hljs-comment">#*************  #使用__init__()初始化一些需要传入的参数及数据集的调用*********</span><br>	 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self,txt, transform=None,target_transform=None, loader=default_loader)</span>:</span>                         <br>		super(MyDataset,self).__init__()<span class="hljs-comment">#对继承自父类的属性进行初始化	                       </span><br>		fh = open(txt, <span class="hljs-string">'r'</span>)<span class="hljs-comment">#按照传入的路径和txt文本参数，以只读的方式打开这个文本		         </span><br>		<span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> fh: <span class="hljs-comment">#迭代该列表#按行循环txt文本中的内</span><br>			line = line.strip(<span class="hljs-string">'\n'</span>)<br>			line = line.rstrip(<span class="hljs-string">'\n'</span>)<br>			             <span class="hljs-comment"># 删除 本行string 字符串末尾的指定字符，这个方法的详细介绍自己查询python</span><br>			words = line.split()<br>			           <span class="hljs-comment">#用split将该行分割成列表  split的默认参数是空格，所以不传递任何参数时分割空格</span><br>			imgs.append((words[<span class="hljs-number">0</span>],int(words[<span class="hljs-number">1</span>])))<br>			         <span class="hljs-comment">#把txt里的内容读入imgs列表保存，具体是words几要看txt内容而定 </span><br>                    <span class="hljs-comment"># 很显然，根据我刚才截图所示txt的内容，words[0]是图片信息，words[1]是lable   </span><br>		self.imgs = imgs<br>		self.transform = transform<br>		self.target_transform = target_transform<br>		self.loader = loader        <br>           <span class="hljs-comment">#************** #使用__getitem__()对数据进行预处理并返回想要的信息***********</span><br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, index)</span>:</span><span class="hljs-comment">#这个方法是必须要有的，用于按照索引读取每个元素的具体内容</span><br>		fn, label = self.imgs[index]<br>		  <span class="hljs-comment">#fn是图片path #fn和label分别获得imgs[index]也即是刚才每行中word[0]和word[1]的信息</span><br>		img = self.loader(fn) <span class="hljs-comment"># 按照路径读取图片               </span><br>		<span class="hljs-keyword">if</span> self.transform <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>			img = self.transform(img) <span class="hljs-comment">#数据标签转换为Tensor</span><br>		<span class="hljs-keyword">return</span> img,label<br>		             <span class="hljs-comment">#return回哪些内容，那么我们在训练时循环读取每个batch时，就能获得哪些内容</span><br>		   <span class="hljs-comment">#**********  #使用__len__()初始化一些需要传入的参数及数据集的调用**********</span><br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span><br>	        <span class="hljs-comment">#这个函数也必须要写，它返回的是数据集的长度，也就是多少张图片，要和loader的长度作区分</span><br>		<span class="hljs-keyword">return</span> len(self.imgs)<br>    <br>train_data=MyDataset(txt=root+<span class="hljs-string">'train.txt'</span>, transform=transforms.ToTensor())<br>test_data = MyDataset(txt=root+<span class="hljs-string">'text.txt'</span>, transform=transforms.ToTensor())<br></code></pre></td></tr></table></figure>
+
+<p>在以上代码中，txt文件内容应如下</p>
+<p><img      class="lazyload" data-original="https://img-blog.csdnimg.cn/20190606142534381.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     alt="在这里插入图片描述"></p>
+<p>即第一项为图片的地址，之后项为标签</p>
+<h3 id="关键思路"><a href="#关键思路" class="headerlink" title="关键思路"></a>关键思路</h3><p>按行读入txt文档中有关图片与标签的信息，存入一个list中，之后根据图片的信息（有时同上为path，有时为对应名称），锁定图片的path，利用<code>Image.open(path).convert(&#39;RGB&#39;)</code>函数读取图片，之后将图片和标签对应到<code>__getitem__</code>函数。当图片被分为多个文件夹保存时，由于不好处理path，可将train_image全部放入一个文件夹中</p>
+<h4 id="移动图片举例"><a href="#移动图片举例" class="headerlink" title="移动图片举例"></a>移动图片举例</h4><p>此例中，图片数据集，train_image与test_image未分离，且保存在多个文件夹中，标签数据分离了train和test，具体如下(以test_label为例)</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1001 </span><span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <br><span class="hljs-symbol">1002 </span><span class="hljs-number">6</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">7</span> <br><span class="hljs-symbol">1024 </span><span class="hljs-number">6</span> <span class="hljs-number">10</span> <span class="hljs-number">4</span> <span class="hljs-number">7</span> <br><span class="hljs-symbol">1029 </span><span class="hljs-number">6</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <br><span class="hljs-symbol">1055 </span><span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">7</span> <span class="hljs-number">5</span> <br><span class="hljs-symbol">1061 </span><span class="hljs-number">6</span> <span class="hljs-number">4</span> <span class="hljs-number">7</span> <span class="hljs-number">5</span> <br><span class="hljs-symbol">1071 </span><span class="hljs-number">23</span> <span class="hljs-number">6</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <br><span class="hljs-symbol">1076 </span><span class="hljs-number">6</span> <span class="hljs-number">24</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+
+<p>其中，1001,1002等为图片名称，之后几列为对应标签(多标签图片分类问题)</p>
+<p>代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> shutil<br>test_list=[]<br><span class="hljs-comment">#获取图片名称</span><br><span class="hljs-keyword">with</span> open(<span class="hljs-string">'./labels/test_label'</span>,<span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f.readlines():<br>        test_name = line.split(<span class="hljs-string">' '</span>)[<span class="hljs-number">0</span>]<br>        test_list.append(test_name)      <br>dir = <span class="hljs-string">'./test image/'</span> <span class="hljs-comment">#图片文件夹path</span><br>files = os.listdir(dir) <span class="hljs-comment">#列举dir下目录和文件</span><br><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files:<br>    name = os.path.splitext(file)[<span class="hljs-number">0</span>] <span class="hljs-comment">#去掉图片的.jpg后缀，与上呼应</span><br>    <span class="hljs-keyword">if</span> name <span class="hljs-keyword">in</span> test_list:<br>        now_path = os.path.join(dir,file)<br>        shutil.move(now_path,<span class="hljs-string">'./test_image/'</span>) <span class="hljs-comment">#test_image为新创建的用于保存test image的文件夹</span><br></code></pre></td></tr></table></figure>
+
+<p>承接此例，写下这种情况下的datasets类该如何写(省略了库的调用)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_loader</span><span class="hljs-params">(path)</span>:</span><br>    <span class="hljs-keyword">return</span> Image.open(path).convert(<span class="hljs-string">'RGB'</span>)<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyDataset</span><span class="hljs-params">(Dataset)</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self,txt, transform=None,target_transform=None,train = False,loader=default_loader)</span>:</span> <br>        super(MyDataset,self).__init__()<br>        fh = open(txt, <span class="hljs-string">'r'</span>)<br>        imgs = []<br>        labels = []<br>        <span class="hljs-keyword">if</span> train:<br>            jpegs_path = <span class="hljs-string">'./train_image/'</span><br>            <span class="hljs-comment">#label_path = os.path.join(self.picroot, 'labels/training_label')</span><br>        <span class="hljs-keyword">else</span>:<br>            jpegs_path = <span class="hljs-string">'./test_image/'</span><br>            <span class="hljs-comment">#label_path = os.path.join(self.picroot, 'labels/test_label')</span><br>		<br>        <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> fh.readlines():<br>            words = line.split() <span class="hljs-comment">#分割图片信息与标签信息</span><br>            jpeg_path = os.path.join(jpegs_path, words[<span class="hljs-number">0</span>]+<span class="hljs-string">'.jpeg'</span>)<br>            image = loader(jpeg_path)<br>            imgs.append(image) <span class="hljs-comment">#完成图片处理</span><br>            code = np.zeros(<span class="hljs-number">374</span>,dtype = np.int)  <span class="hljs-comment">#此处因多标签问题，将标签数变成了一个长度为374的01矩阵（标签共有374个）</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(words)<span class="hljs-number">-1</span>):<br>                <span class="hljs-keyword">if</span>(int(words[i+<span class="hljs-number">1</span>]) !=<span class="hljs-number">0</span>):<br>                    code[int(words[i+<span class="hljs-number">1</span>])<span class="hljs-number">-1</span>] = <span class="hljs-number">1</span><br>            labels.append(code) <span class="hljs-comment">#完成标签处理</span><br>        self.imgs = imgs<br>        self.labels = labels<br>        self.transform = transform<br>        self.target_transform = target_transform<br>        self.loader = loader<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span><span class="hljs-params">(self, index)</span>:</span><br>        img = self.imgs[index]<br>        label = self.labels[index] <br>        <span class="hljs-keyword">if</span> self.transform <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            img = self.transform(img) <br>        <span class="hljs-keyword">return</span> img,label<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span><span class="hljs-params">(self)</span>:</span><br>    	<span class="hljs-keyword">return</span> len(self.imgs)<br></code></pre></td></tr></table></figure>
+
+<h3 id="显示数据"><a href="#显示数据" class="headerlink" title="显示数据"></a>显示数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">y_test = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(test_data)):<br>    img,label = test_data.__getitem__(i)<br>    y_test.append(label)<br>print(y_test)<br></code></pre></td></tr></table></figure>
+
+
+    </section>
+    <section class="extra">
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img      class="lazyload" data-original="http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="    >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/datasets/" rel="tag">datasets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a></li></ul>
+
+      
+<nav class="nav">
+  
+  
+    <a href="/2020/05/16/jupyter%E6%89%8B%E5%86%8C/">jupyter的使用手册<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1174543808 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/smacaijicoder " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:u201813452@hust.edu.cn " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2020 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</footer>
+    <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+</html>
