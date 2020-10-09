@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>java异常处理 - 小菜鸡的探险之旅</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  
+  <meta name="description" content="java异常处理异常是一种class，因此它本身带有类..."> 
+  
+  <meta name="author" content="稳压器"> 
+  <link rel="shortcut icon" href="/image/favicon.jpg">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: true,
+      donate_alipay: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r',
+      donate_wechat: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMXMiCjQ2grqQ1FNdpWJ5kQ2CdYILLgvG8xrbYu99rdM0FnNYVFE6QDVntEljo5O1tJIwAgZF0VXkJfzuJuyeJBw!/r',
+      gitalk: {
+        enable: false,
+        clientID: '',
+        clientSecret: '',
+        id: window.location.pathname,
+        repo: '',
+        owner: '',
+        admin: ''
+      },
+      motto: {
+        api: '',
+        default: '子非我，安知我不知鱼之乐？'
+      }
+    }
+  </script>
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  <header>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2020 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</nav>
+</header>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img      class="lazyload" data-original="/image/post-image21.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">java异常处理</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-10-09</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2261</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <h2 id="java异常处理"><a href="#java异常处理" class="headerlink" title="java异常处理"></a>java异常处理</h2><p>异常是一种<code>class</code>，因此它本身带有类型信息。</p>
+<p>因为Java的异常是<code>class</code>，它的继承关系如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs ascii">                     ┌───────────┐<br>                     │  Object   │<br>                     └───────────┘<br>                           ▲<br>                           │<br>                     ┌───────────┐<br>                     │ Throwable │<br>                     └───────────┘<br>                           ▲<br>                 ┌─────────┴─────────┐<br>                 │                   │<br>           ┌───────────┐       ┌───────────┐<br>           │   Error   │       │ Exception │<br>           └───────────┘       └───────────┘<br>                 ▲                   ▲<br>         ┌───────┘              ┌────┴──────────┐<br>         │                      │               │<br>┌─────────────────┐    ┌─────────────────┐┌───────────┐<br>│OutOfMemoryError │... │RuntimeException ││IOException│...<br>└─────────────────┘    └─────────────────┘└───────────┘<br>                                ▲<br>                    ┌───────────┴─────────────┐<br>                    │                         │<br>         ┌─────────────────────┐ ┌─────────────────────────┐<br>         │NullPointerException │ │IllegalArgumentException │...<br>         └─────────────────────┘ └─────────────────────────┘<br></code></pre></td></tr></table></figure>
+
+<p>从继承关系可知：<code>Throwable</code>是异常体系的根，它继承自<code>Object</code>。<code>Throwable</code>有两个体系：<code>Error</code>和<code>Exception</code>，<code>Error</code>表示严重的错误，程序对此一般无能为力，例如：</p>
+<ul>
+<li><code>OutOfMemoryError</code>：内存耗尽</li>
+<li><code>NoClassDefFoundError</code>：无法加载某个Class</li>
+<li><code>StackOverflowError</code>：栈溢出</li>
+</ul>
+<p>而<code>Exception</code>则是运行时的错误，它可以被捕获并处理。</p>
+<p><code>Exception</code>又分为两大类：</p>
+<ol>
+<li><code>RuntimeException</code>以及它的子类；</li>
+<li>非<code>RuntimeException</code>（包括<code>IOException</code>、<code>ReflectiveOperationException</code>等等）</li>
+</ol>
+<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>捕获异常使用<code>try...catch</code>语句，把可能发生异常的代码放到<code>try {...}</code>中，然后使用<code>catch</code>捕获对应的<code>Exception</code>及其子类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.UnsupportedEncodingException;<br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">byte</span>[] bs = toGBK(<span class="hljs-string">"中文"</span>);<br>        System.out.println(Arrays.toString(bs));<br>    &#125;<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">byte</span>[] toGBK(String s) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 用指定编码转换String为byte[]:</span><br>            <span class="hljs-keyword">return</span> s.getBytes(<span class="hljs-string">"GBK"</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (UnsupportedEncodingException e) &#123;<br>            <span class="hljs-comment">// 如果系统不支持GBK编码，会捕获到UnsupportedEncodingException:</span><br>            System.out.println(e); <span class="hljs-comment">// 打印异常信息</span><br>            <span class="hljs-keyword">return</span> s.getBytes(); <span class="hljs-comment">// 尝试使用用默认编码</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>一旦<code>throws</code>了错误，就要捕获它，不然无法通过编译</p>
+
+    </section>
+    <section class="extra">
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img      class="lazyload" data-original="http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="    >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+      
+<nav class="nav">
+  
+  
+    <a href="/2020/09/30/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%9F%E4%B8%8D%E7%9F%A5%E6%9C%89%E5%87%A0%E7%AF%87%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E7%AF%87/">java面向对象编程也不知有几篇之最后一篇<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1174543808 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/smacaijicoder " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:u201813452@hust.edu.cn " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2020 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</footer>
+    <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+</html>

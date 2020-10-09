@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>java面向对象编程也不知有几篇之第三篇 - 小菜鸡的探险之旅</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  
+  <meta name="description" content="java面向对象编程也不知有几篇之第三篇继续吧，我感觉..."> 
+  
+  <meta name="author" content="稳压器"> 
+  <link rel="shortcut icon" href="/image/favicon.jpg">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: true,
+      donate_alipay: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r',
+      donate_wechat: 'http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMXMiCjQ2grqQ1FNdpWJ5kQ2CdYILLgvG8xrbYu99rdM0FnNYVFE6QDVntEljo5O1tJIwAgZF0VXkJfzuJuyeJBw!/r',
+      gitalk: {
+        enable: false,
+        clientID: '',
+        clientSecret: '',
+        id: window.location.pathname,
+        repo: '',
+        owner: '',
+        admin: ''
+      },
+      motto: {
+        api: '',
+        default: '子非我，安知我不知鱼之乐？'
+      }
+    }
+  </script>
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  <header>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2020 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</nav>
+</header>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img      class="lazyload" data-original="/image/post-image17.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">java面向对象编程也不知有几篇之第三篇</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-09-27</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>3644</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <h2 id="java面向对象编程也不知有几篇之第三篇"><a href="#java面向对象编程也不知有几篇之第三篇" class="headerlink" title="java面向对象编程也不知有几篇之第三篇"></a>java面向对象编程也不知有几篇之第三篇</h2><p>继续吧，我感觉快要结束了</p>
+<h3 id="静态字段和静态方法"><a href="#静态字段和静态方法" class="headerlink" title="静态字段和静态方法"></a>静态字段和静态方法</h3><h4 id="静态字段"><a href="#静态字段" class="headerlink" title="静态字段"></a>静态字段</h4><p>用<code>static</code>修饰的字段，称为静态字段。实例字段在每个实例中都有自己的一个独立“空间”，但是静态字段只有一个共享“空间”，所有实例都会共享该字段。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> String name;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> age;<br>    <span class="hljs-comment">// 定义静态字段number:</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> number;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于静态字段，无论修改哪个实例的静态字段，效果都是一样的：所有实例的静态字段都被修改了</p>
+<p>推荐用类名来访问静态字段。可以把静态字段理解为描述<code>class</code>本身的字段（非实例字段）。</p>
+<p>静态字段存放于代码段，和方法在一起，即不在堆（存放类的非静态属性）中，它是属于类的。</p>
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><p>用<code>static</code>修饰的方法称为静态方法。调用实例方法必须通过一个实例变量，而调用静态方法则<font color = red size = 4>不需要实例变量</font>，<font color = red size =4>通过类名</font>就可以调用。因为静态方法属于<code>class</code>而不属于实例，因此，静态方法内部，无法访问<code>this</code>变量，也无法访问实例字段，它<font color=red>只能访问静态字段</font>。</p>
+<h4 id="接口的静态字段"><a href="#接口的静态字段" class="headerlink" title="接口的静态字段"></a>接口的静态字段</h4><p>因为<code>interface</code>是一个纯抽象类，所以它不能定义实例字段。但是，<code>interface</code>是可以有静态字段的，并且静态字段必须为<code>final</code>类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Person</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MALE = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> FEMALE = <span class="hljs-number">2</span>;<br>    <span class="hljs-comment">// 编译器会自动加上public statc final:</span><br>    <span class="hljs-comment">//int MALE = 1;</span><br>    <span class="hljs-comment">//int FEMALE = 2; 所以可以偷懒！</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><p>Java定义了一种名字空间，称之为包：<code>package</code>。一个类总是属于某个包，类名（比如<code>Person</code>）只是一个简写，真正的完整类名是<code>包名.类名</code>。</p>
+<p>例如：</p>
+<p>小明的<code>Person</code>类存放在包<code>ming</code>下面，因此，完整类名是<code>ming.Person</code>；</p>
+<p>小红的<code>Person</code>类存放在包<code>hong</code>下面，因此，完整类名是<code>hong.Person</code>；</p>
+<p>JDK的<code>Arrays</code>类存放在包<code>java.util</code>下面，因此，完整类名是<code>java.util.Arrays</code>。</p>
+<p>在定义<code>class</code>的时候，我们需要在第一行声明这个<code>class</code>属于哪个包。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//小明的Person.java文件：</span><br><span class="hljs-keyword">package</span> ming; <span class="hljs-comment">// 申明包名ming</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><font size=4 color=#B22222 >要特别注意：包没有父子关系。java.util和java.util.zip是不同的包，两者没有任何继承关系。</font></p>
+<p>没有定义包名的<code>class</code>，它使用的是默认包，非常容易引起名字冲突，因此，不推荐不写包名的做法。</p>
+<p>我们还需要按照包结构把上面的Java文件组织起来。假设以<code>package_sample</code>作为根目录，<code>src</code>作为源码目录，那么所有文件结构就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ascii">package_sample<br>└─ src<br>    ├─ hong<br>    │  └─ Person.java<br>    │  ming<br>    │  └─ Person.java<br>    └─ mr<br>       └─ jun<br>          └─ Arrays.java<br></code></pre></td></tr></table></figure>
+
+<p>即所有Java文件对应的目录层次要和包的层次一致。</p>
+<p>编译后的<code>.class</code>文件也需要按照包结构存放。如果使用IDE，把编译后的<code>.class</code>文件放到<code>bin</code>目录下，那么，编译的文件结构就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ascii">package_sample<br>└─ bin<br>   ├─ hong<br>   │  └─ Person.class<br>   │  ming<br>   │  └─ Person.class<br>   └─ mr<br>      └─ jun<br>         └─ Arrays.class<br></code></pre></td></tr></table></figure>
+
+<p>编译的命令相对比较复杂，我们需要在<code>src</code>目录下执行<code>javac</code>命令：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">javac -d ../bin ming/<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Person</span>.</span></span>java hong/<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Person</span>.</span></span>java mr/jun/<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span>java<br></code></pre></td></tr></table></figure>
+
+<h4 id="包作用域"><a href="#包作用域" class="headerlink" title="包作用域"></a>包作用域</h4><p>位于同一个包的类，可以访问包作用域的字段和方法。不用<code>public</code>、<code>protected</code>、<code>private</code>修饰的字段和方法就是包作用域。</p>
+<h4 id="import"><a href="#import" class="headerlink" title="import"></a>import</h4><p>在一个<code>class</code>中，我们总会引用其他的<code>class</code>。可以用<code>import</code>语句，导入小军的<code>Arrays</code>，然后写简单类名。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> ming;<br><br><span class="hljs-comment">// 导入完整类名:</span><br><span class="hljs-keyword">import</span> mr.jun.Arrays;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        Arrays arrays = <span class="hljs-keyword">new</span> Arrays();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JDK的核心类使用<code>java.lang</code>包，编译器会自动导入；</p>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>在Java中，我们经常看到<code>public</code>、<code>protected</code>、<code>private</code>这些修饰符。在Java中，这些修饰符可以用来限定访问作用域。</p>
+<h4 id="public"><a href="#public" class="headerlink" title="public"></a>public</h4><p>定义为<code>public</code>的<code>class</code>、<code>interface</code>可以被其他任何类访问。定义为<code>public</code>的<code>field</code>、<code>method</code>可以被其他类访问，前提是首先有访问<code>class</code>的权限。</p>
+<h4 id="private"><a href="#private" class="headerlink" title="private"></a>private</h4><p>定义为<code>private</code>的<code>field</code>、<code>method</code>无法被其他类访问。实际上，确切地说，<code>private</code>访问权限被限定在<code>class</code>的内部，而且与方法声明顺序<em>无关</em>。推荐把<code>private</code>方法放到后面。</p>
+<p>由于Java支持嵌套类，如果一个类内部还定义了嵌套类，那么，嵌套类拥有访问<code>private</code>的权限。</p>
+<h4 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h4><p><code>protected</code>作用于继承关系。定义为<code>protected</code>的字段和方法可以被子类访问，以及子类的子类。</p>
+<h4 id="package"><a href="#package" class="headerlink" title="package"></a>package</h4><p>包作用域是指一个类允许访问同一个<code>package</code>的没有<code>public</code>、<code>private</code>修饰的<code>class</code>，以及没有<code>public</code>、<code>protected</code>、<code>private</code>修饰的字段和方法。</p>
+<p><strong>一个<code>.java</code>文件只能包含一个<code>public</code>类，但可以包含多个非<code>public</code>类。如果有<code>public</code>类，文件名必须和<code>public</code>类的名字相同。</strong></p>
+<h3 id="classpath和jar"><a href="#classpath和jar" class="headerlink" title="classpath和jar"></a>classpath和jar</h3><p><code>classpath</code>是JVM用到的一个环境变量，它用来指示JVM如何搜索<code>class</code>。因为Java是编译型语言，源码文件是<code>.java</code>，而编译后的<code>.class</code>文件才是真正可以被JVM执行的字节码。因此，JVM需要知道，如果要加载一个<code>abc.xyz.Hello</code>的类，应该去哪搜索对应的<code>Hello.class</code>文件。</p>
+<p>推荐，在启动JVM时设置<code>classpath</code>变量。</p>
+<h4 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h4><p>把目录打一个包，变成一个文件，就方便多了，jar包就是用来干这个事的，它可以把<code>package</code>组织的目录层级，以及各个目录下的所有文件（包括<code>.class</code>文件和其他文件）都打成一个jar文件</p>
+<p>jar包实际上就是一个zip格式的压缩文件，而jar包相当于目录。如果我们要执行一个jar包的<code>class</code>，就可以把jar包放到<code>classpath</code>中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">java -cp ./hello.jar abc.xyz.Hello<br></code></pre></td></tr></table></figure>
+
+<p>把后缀从<code>.zip</code>改为<code>.jar</code>，一个jar包就创建成功。</p>
+<p><font size=4 color=#B22222 >这里需要特别注意的是，jar包里的第一层目录，不能是<code>bin</code>，而应该是<code>hong</code>、<code>ming</code>、<code>mr</code>。</font></p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>如果<code>a.jar</code>必须依赖另一个<code>b.jar</code>才能运行，那我们应该给<code>a.jar</code>加点说明啥的，让程序在编译和运行的时候能自动定位到<code>b.jar</code>，这种自带“依赖关系”的class容器就是模块。</p>
+<p>首先，创建模块和原有的创建Java项目是完全一样的，以<code>oop-module</code>工程为例，它的目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ascii">oop-module<br>├── bin<br>├── build.sh<br>└── src<br>    ├── com<br>    │   └── itranswarp<br>    │       └── sample<br>    │           ├── Greeting.java<br>    │           └── Main.java<br>    └── module-info.java<br></code></pre></td></tr></table></figure>
+
+<p>其中，<code>bin</code>目录存放编译后的class文件，<code>src</code>目录存放源码，按包名的目录结构存放，仅仅在<code>src</code>目录下多了一个<code>module-info.java</code>这个文件，这就是模块的描述文件。在这个模块中，它长这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">module</span> hello.world &#123;<br>	<span class="hljs-keyword">requires</span> java.base; <span class="hljs-comment">// 可不写，任何模块都会自动引入java.base</span><br>	<span class="hljs-keyword">requires</span> java.xml;<br>&#125;<br></code></pre></td></tr></table></figure>
+    </section>
+    <section class="extra">
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img      class="lazyload" data-original="http://r.photo.store.qq.com/psc?/V11rrToO3DEUdM/LjNfElrpEt6hXz54k3bCMZNyLQG8yzgItCWlfr6pBR7yeBD*CTHdFPtMl*Sq4XrNmUH8roGTGFI2Z04xjEFEF7LwUWyy*7nZIGX5*.*mSnI!/r"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="    >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+      
+<nav class="nav">
+  
+    <a href="/2020/09/30/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%9F%E4%B8%8D%E7%9F%A5%E6%9C%89%E5%87%A0%E7%AF%87%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E7%AF%87/"><i class="iconfont iconleft"></i>java面向对象编程也不知有几篇之最后一篇</a>
+  
+  
+    <a href="/2020/09/27/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%9F%E4%B8%8D%E7%9F%A5%E6%9C%89%E5%87%A0%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%BA%8C%E7%AF%87/">java面向对象编程也不知有几篇之第二篇<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1174543808 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/smacaijicoder " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:u201813452@hust.edu.cn " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2020 | <a target="_blank" href="https://smacaijicoder.github.io/">smacaijicoder</a> .AllRightsReserved</p></div>
+</footer>
+    <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+</html>
