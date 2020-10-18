@@ -6,13 +6,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>java面向对象编程也不知有几篇之第二篇 - 小菜鸡的探险之旅</title>
+  <title>java面向对象编程之第二篇 - 小菜鸡的探险之旅</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
   
   
-  <meta name="description" content="java面向对象编程也不知有几篇之第二篇本文继续快乐的..."> 
+  <meta name="description" content="java面向对象编程之第二篇本文继续快乐的java学习..."> 
   
   <meta name="author" content="稳压器"> 
   <link rel="shortcut icon" href="/image/favicon.jpg">
@@ -116,18 +116,18 @@
   <section class="head">
   <img      class="lazyload" data-original="/image/post-image20.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
   <div class="head-mask">
-    <h1 class="head-title">java面向对象编程也不知有几篇之第二篇</h1>
+    <h1 class="head-title">java面向对象编程之第二篇</h1>
     <div class="head-info">
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-09-27</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7098</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7166</span>
     </div>
   </div>
 </section>
   <section class="main">
     <section class="content">
-      <h2 id="java面向对象编程也不知有几篇之第二篇"><a href="#java面向对象编程也不知有几篇之第二篇" class="headerlink" title="java面向对象编程也不知有几篇之第二篇"></a>java面向对象编程也不知有几篇之第二篇</h2><p>本文继续<del>快乐</del>的java学习</p>
+      <h2 id="java面向对象编程之第二篇"><a href="#java面向对象编程之第二篇" class="headerlink" title="java面向对象编程之第二篇"></a>java面向对象编程之第二篇</h2><p>本文继续<del>快乐</del>的java学习</p>
 <p>[toc]</p>
 <h3 id="一、继承"><a href="#一、继承" class="headerlink" title="一、继承"></a>一、继承</h3><p>继承是面向对象编程中非常强大的一种机制，它首先可以复用代码。当我们让<code>Student</code>从<code>Person</code>继承时，<code>Student</code>就获得了<code>Person</code>的所有功能，我们只需要为<code>Student</code>编写新增的功能。</p>
 <p>Java使用<code>extends</code>关键字来实现继承：</p>
@@ -232,6 +232,11 @@
 <p>一般来说，公共逻辑适合放在<code>abstract class</code>中，具体逻辑放到各个子类，而接口层次代表抽象程度。</p>
 <h4 id="default方法"><a href="#default方法" class="headerlink" title="default方法"></a>default方法</h4><p>在接口中，可以定义<code>default</code>方法。例如，把<code>Person</code>接口的<code>run()</code>方法改为<code>default</code>方法，实现类可以不必覆写<code>default</code>方法。<code>default</code>方法的目的是，当我们需要给接口新增一个方法时，会涉及到修改全部子类。如果新增的是<code>default</code>方法，那么子类就不必全部修改，只需要在需要覆写的地方去覆写新增方法。</p>
 <p><code>default</code>方法和抽象类的普通方法是有所不同的。因为<code>interface</code>没有字段，<code>default</code>方法无法访问字段，而抽象类的普通方法可以访问实例字段。</p>
+<p>抽象类和接口的区别：</p>
+<ul>
+<li>抽象类的继承只能单根继承，而接口可以被一个类实现多个。</li>
+<li>但接口被定义了的所有方法都要实现，而抽象类有一些方法可以不用实现</li>
+</ul>
 
     </section>
     <section class="extra">
@@ -252,10 +257,10 @@
       
 <nav class="nav">
   
-    <a href="/2020/09/27/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%9F%E4%B8%8D%E7%9F%A5%E6%9C%89%E5%87%A0%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87/"><i class="iconfont iconleft"></i>java面向对象编程也不知有几篇之第三篇</a>
+    <a href="/2020/09/27/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%8B%E7%AC%AC%E4%B8%89%E7%AF%87/"><i class="iconfont iconleft"></i>java面向对象编程之第三篇</a>
   
   
-    <a href="/2020/09/26/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%9F%E4%B8%8D%E7%9F%A5%E6%9C%89%E5%87%A0%E7%AF%87%E4%B9%8B%E7%AC%AC%E4%B8%80%E7%AF%87/">java面向对象编程也不知道有几篇之第一篇<i class="iconfont iconright"></i></a>
+    <a href="/2020/09/26/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%8B%E7%AC%AC%E4%B8%80%E7%AF%87/">java面向对象编程之第一篇<i class="iconfont iconright"></i></a>
   
 </nav>
 

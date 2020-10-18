@@ -114,14 +114,14 @@
   <div class="container" id="container">
     <article class="article">
   <section class="head">
-  <img      class="lazyload" data-original="/image/post-image21.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
+  <img      class="lazyload" data-original="/image/post-image11.jpg"  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class="lazyload" data-original="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="     draggable="false">
   <div class="head-mask">
     <h1 class="head-title">java异常处理</h1>
     <div class="head-info">
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-10-09</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2261</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2466</span>
     </div>
   </div>
 </section>
@@ -147,6 +147,9 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.UnsupportedEncodingException;<br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">byte</span>[] bs = toGBK(<span class="hljs-string">"中文"</span>);<br>        System.out.println(Arrays.toString(bs));<br>    &#125;<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">byte</span>[] toGBK(String s) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 用指定编码转换String为byte[]:</span><br>            <span class="hljs-keyword">return</span> s.getBytes(<span class="hljs-string">"GBK"</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (UnsupportedEncodingException e) &#123;<br>            <span class="hljs-comment">// 如果系统不支持GBK编码，会捕获到UnsupportedEncodingException:</span><br>            System.out.println(e); <span class="hljs-comment">// 打印异常信息</span><br>            <span class="hljs-keyword">return</span> s.getBytes(); <span class="hljs-comment">// 尝试使用用默认编码</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>一旦<code>throws</code>了错误，就要捕获它，不然无法通过编译</p>
+<p>所有异常都可以调用<code>printStackTrace()</code>方法打印异常栈，这是一个简单有用的快速打印异常的方法。</p>
+<p>可以使用多个<code>catch</code>语句，每个<code>catch</code>分别捕获对应的<code>Exception</code>及其子类。JVM在捕获到异常后，会从上到下匹配<code>catch</code>语句，匹配到某个<code>catch</code>后，执行<code>catch</code>代码块，然后不再继续匹配。</p>
+<p>简单地说就是：多个<code>catch</code>语句只有一个能被执行。所以<code>catch</code>的顺序非常重要：子类必须写在前面。</p>
 
     </section>
     <section class="extra">
@@ -168,7 +171,7 @@
 <nav class="nav">
   
   
-    <a href="/2020/09/30/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%9F%E4%B8%8D%E7%9F%A5%E6%9C%89%E5%87%A0%E7%AF%87%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E7%AF%87/">java面向对象编程也不知有几篇之最后一篇<i class="iconfont iconright"></i></a>
+    <a href="/2020/09/30/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E7%AF%87/">java面向对象编程之最后一篇<i class="iconfont iconright"></i></a>
   
 </nav>
 
