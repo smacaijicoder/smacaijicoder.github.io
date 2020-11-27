@@ -121,7 +121,7 @@
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-10-09</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2466</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4905</span>
     </div>
   </div>
 </section>
@@ -150,6 +150,35 @@
 <p>所有异常都可以调用<code>printStackTrace()</code>方法打印异常栈，这是一个简单有用的快速打印异常的方法。</p>
 <p>可以使用多个<code>catch</code>语句，每个<code>catch</code>分别捕获对应的<code>Exception</code>及其子类。JVM在捕获到异常后，会从上到下匹配<code>catch</code>语句，匹配到某个<code>catch</code>后，执行<code>catch</code>代码块，然后不再继续匹配。</p>
 <p>简单地说就是：多个<code>catch</code>语句只有一个能被执行。所以<code>catch</code>的顺序非常重要：子类必须写在前面。</p>
+<h3 id="finally语句"><a href="#finally语句" class="headerlink" title="finally语句"></a>finally语句</h3><p><code>finally</code>语句块保证有无错误都会执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        process1();<br>        process2();<br>        process3();<br>    &#125; <span class="hljs-keyword">catch</span> (UnsupportedEncodingException e) &#123;<br>        System.out.println(<span class="hljs-string">"Bad encoding"</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>        System.out.println(<span class="hljs-string">"IO error"</span>);<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        System.out.println(<span class="hljs-string">"END"</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>finally</code>语句不是必须的，可写可不写；<code>finally</code>总是最后执行且一定会执行。</p>
+<p>如果没有发生异常，就正常执行<code>try { ... }</code>语句块，然后执行<code>finally</code>。如果发生了异常，就中断执行<code>try { ... }</code>语句块，然后跳转执行匹配的<code>catch</code>语句块，最后执行<code>finally</code>。</p>
+<p>如果在<code>catch</code>中有<code>return</code>，<code>finally</code>语句中的代码仍会执行。</p>
+<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>当发生错误时，例如，用户输入了非法的字符，我们就可以抛出异常。</p>
+<p>如何抛出异常？参考<code>Integer.parseInt()</code>方法，抛出异常分两步：</p>
+<ol>
+<li>创建某个<code>Exception</code>的实例；</li>
+<li>用<code>throw</code>语句抛出。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process2</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (s==<span class="hljs-keyword">null</span>) &#123;<br>        NullPointerException e = <span class="hljs-keyword">new</span> NullPointerException();<br>        <span class="hljs-keyword">throw</span> e;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果一个方法捕获了某个异常后，又在<code>catch</code>子句中抛出新的异常，就相当于把抛出的异常类型“转换”了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process1</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        process2();<br>    &#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException();<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process2</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (s==<span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果在<code>main()</code>中捕获<code>IllegalArgumentException</code>，我们看看打印的异常栈：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">java.lang.IllegalArgumentException<br>    at Main.process1(Main.java:<span class="hljs-number">15</span>)<br>    at Main.main(Main.java:<span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
+
+<p>这说明新的异常丢失了原始异常信息，我们已经看不到原始异常<code>NullPointerException</code>的信息了。</p>
+<p>为了能追踪到完整的异常栈，在构造异常的时候，把原始的<code>Exception</code>实例传进去，新的<code>Exception</code>就可以持有原始<code>Exception</code>信息。对上述代码改进如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            process1();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process1</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            process2();<br>        &#125; <span class="hljs-keyword">catch</span> (NullPointerException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(e);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process2</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>运行上述代码，打印出的异常栈类似：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">java.lang.IllegalArgumentException: java.lang.NullPointerException<br>    at Main.process1(Main.java:<span class="hljs-number">15</span>)<br>    at Main.main(Main.java:<span class="hljs-number">5</span>)<br>Caused by: java.lang.NullPointerException<br>    at Main.process2(Main.java:<span class="hljs-number">20</span>)<br>    at Main.process1(Main.java:<span class="hljs-number">13</span>)<br></code></pre></td></tr></table></figure>
+
+<p>注意到<code>Caused by: Xxx</code>，说明捕获的<code>IllegalArgumentException</code>并不是造成问题的根源，根源在于<code>NullPointerException</code>，是在<code>Main.process2()</code>方法抛出的。</p>
+<p>！捕获到异常并再次抛出时，一定要留住原始异常，否则很难定位第一案发现场！</p>
 
     </section>
     <section class="extra">
@@ -169,6 +198,8 @@
 
       
 <nav class="nav">
+  
+    <a href="/2020/11/08/pyqt%E5%90%AF%E5%8A%A8%E7%94%BB%E9%9D%A2/"><i class="iconfont iconleft"></i>pyqt5启动画面</a>
   
   
     <a href="/2020/09/30/java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%9C%80%E5%90%8E%E4%B8%80%E7%AF%87/">java面向对象编程之最后一篇<i class="iconfont iconright"></i></a>
